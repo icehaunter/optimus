@@ -63,11 +63,14 @@ defmodule Optimus.Builder do
 
   defp build_summary(props, about) do
     with {:ok, summary} <- PP.build_string(:summary, props[:summary], nil) do
-      case {summary, about} do
-        {nil, nil} -> nil
-        {nil, about} -> String.split(about, "\n\n") |> List.first() |> String.trim()
-        {summary, _} -> summary
-      end
+      value =
+        case {summary, about} do
+          {nil, nil} -> nil
+          {nil, about} -> String.split(about, "\n\n") |> List.first() |> String.trim()
+          {summary, _} -> summary
+        end
+
+      {:ok, value}
     end
   end
 

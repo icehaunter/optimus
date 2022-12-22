@@ -883,7 +883,7 @@ defmodule OptimusTest do
         options: options
       )
 
-    help = Optimus.help(optimus)
+    help = Optimus.Help.help(optimus, [], 80) |> Enum.join("\n")
 
     assert is_binary(help)
 
