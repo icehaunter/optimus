@@ -1,4 +1,5 @@
 defmodule Optimus.Title do
+  @spec title(Optimus.t(), list()) :: list()
   def title(optimus, subcommand_path \\ []) do
     {author, description, version, about} = find_title_info(optimus, subcommand_path)
 
@@ -12,6 +13,7 @@ defmodule Optimus.Title do
     |> List.flatten()
   end
 
+  @spec find_title_info(Optimus.t(), list()) :: {String.t() | nil, String.t() | nil, String.t() | nil, String.t() | nil}
   def find_title_info(optimus, []),
     do: {optimus.author, optimus.description, optimus.version, optimus.about}
 

@@ -88,7 +88,14 @@ defmodule Optimus do
   @type spec :: [spec_item]
 
   @type error :: String.t()
-  @opaque t :: %Optimus{}
+  @type t :: %Optimus{
+    name: String.t(),
+    about: String.t(),
+    author: String.t(),
+    version: String.t(),
+    subcommands: list(t()),
+    subcommand: String.t() | nil
+  }
 
   @spec new(spec) :: {:ok, t} | {:error, [error]}
   def new(props) do

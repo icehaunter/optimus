@@ -23,7 +23,7 @@ defmodule Optimus.Mixfile do
       dialyzer: [
         plt_add_deps: true,
         plt_add_apps: [:ssl],
-        flags: ["-Werror_handling", "-Wrace_conditions"]
+        flags: ["-Werror_handling"]
       ],
       package: package()
     ]
