@@ -40,8 +40,8 @@ defmodule Optimus.Help do
   defp subcommand_formatables(subcommand) do
     [
       {"ARGS:", subcommand.args},
-      {"FLAGS:", subcommand.flags},
-      {"OPTIONS:", subcommand.options},
+      {"FLAGS:", subcommand.flags |> Enum.reject(& &1.hide)},
+      {"OPTIONS:", subcommand.options |> Enum.reject(& &1.hide)},
       {"SUBCOMMANDS:", subcommand.subcommands}
     ]
   end
