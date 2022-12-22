@@ -453,5 +453,5 @@ defimpl Optimus.Format, for: Optimus do
   def format_in_error(optimus), do: optimus.name
   def format_in_usage(optimus), do: optimus.name
 
-  def help(optimus), do: optimus.about || ""
+  def help(optimus), do: optimus.summary || ""
 end
