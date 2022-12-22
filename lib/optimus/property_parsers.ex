@@ -64,7 +64,7 @@ defmodule Optimus.PropertyParsers do
 
   def build_string(name, value, default \\ "")
   def build_string(_name, nil, default), do: {:ok, default}
-  def build_string(_name, value, _default) when is_binary(value), do: {:ok, value}
+  def build_string(_name, value, _default) when is_binary(value), do: {:ok, String.trim(value)}
 
   def build_string(name, _value, _default),
     do: {:error, "value of #{inspect(name)} property is expected to be String or nil"}

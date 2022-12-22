@@ -13,6 +13,7 @@ defmodule Optimus.Builder do
          {:ok, version} <- build_version(props),
          {:ok, author} <- build_author(props),
          {:ok, about} <- build_about(props),
+         {:ok, summary} <- build_summary(props, about),
          {:ok, allow_unknown_args} <- build_allow_unknown_args(props),
          {:ok, parse_double_dash} <- build_parse_double_dash(props),
          {:ok, args} <- build_args(props[:args]),
@@ -30,6 +31,7 @@ defmodule Optimus.Builder do
               version: version,
               author: author,
               about: about,
+              summary: summary,
               allow_unknown_args: allow_unknown_args,
               parse_double_dash: parse_double_dash,
               args: args,
@@ -57,6 +59,16 @@ defmodule Optimus.Builder do
 
   defp build_about(props) do
     PP.build_string(:about, props[:about], nil)
+  end
+
+  defp build_summary(props, about) do
+    with {:ok, summary} <- PP.build_string(:summary, props[:summary], nil) do
+      case {summary, about} do
+        {nil, nil} -> nil
+        {nil, about} -> String.split(about, "\n\n") |> List.first() |> String.trim()
+        {summary, _} -> summary
+      end
+    end
   end
 
   defp build_allow_unknown_args(props) do

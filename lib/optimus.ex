@@ -9,6 +9,7 @@ defmodule Optimus do
     :version,
     :author,
     :about,
+    :summary,
     :allow_unknown_args,
     :parse_double_dash,
     :args,
@@ -93,6 +94,7 @@ defmodule Optimus do
     about: String.t(),
     author: String.t(),
     version: String.t(),
+    summary: String.t() | nil,
     subcommands: list(t()),
     subcommand: String.t() | nil
   }
@@ -177,9 +179,7 @@ defmodule Optimus do
   end
 
   def help(optimus) do
-    optimus
-    |> Optimus.Help.help([], columns())
-    |> Enum.join("\n")
+    optimus.summary || ""
   end
 
   defp columns do
